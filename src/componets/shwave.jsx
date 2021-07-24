@@ -82,19 +82,19 @@ class ShWave extends Component {
     const ctx = waveCanvas && waveCanvas.getContext("2d");
     if (!waveCanvas || !ctx) return;
     //绘制背景
-    painter.drawBackground(waveCanvas, ctx, backgroundColor);
+    // painter.drawBackground(waveCanvas, ctx, backgroundColor);
     //绘制尺子
-    painter.drawRuler(waveCanvas, ctx, pixelRatio, duration, currentTime);
+    // painter.drawRuler(waveCanvas, ctx, pixelRatio, duration, currentTime);
     //绘制指针
-    painter.drawPointer(
-      waveCanvas,
-      ctx,
-      pixelRatio,
-      duration,
-      currentTime,
-      pointerColor,
-      pointerWidth
-    );
+    // painter.drawPointer(
+    //   waveCanvas,
+    //   ctx,
+    //   pixelRatio,
+    //   duration,
+    //   currentTime,
+    //   pointerColor,
+    //   pointerWidth
+    // );
     //绘制音频
     if (!this.state.audioData) return;
 
