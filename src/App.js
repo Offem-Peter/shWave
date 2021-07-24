@@ -79,6 +79,7 @@ const App = () => {
 
   const handleSubClick = useCallback((sub) => {
     console.log(sub);
+    console.log("click subArray");
   });
 
   const handleSubMove = useCallback((originSub, translateSecond) => {
@@ -88,7 +89,7 @@ const App = () => {
     sub.start += translateSecond;
     sub.end += translateSecond;
     subs[index] = sub;
-    console.log("update subArray");
+    console.log("move subArray");
     setSubArray(subs);
   });
 
@@ -107,7 +108,7 @@ const App = () => {
     }
     sub.length = sub.end - sub.start;
     subs[index] = sub;
-    console.log("update subArray");
+    console.log("resize subArray");
     setSubArray(subs);
   });
 

@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { css, jsx } from "@emotion/core";
 import painter from "../common/painter";
 import common from "../common/common";
+import { FixedSizeList as List } from "react-window";
 
 //当前选择的subBlock
 let currentSubBlock = null;
@@ -206,6 +207,71 @@ const SubBlocks = ({
   const filteredSubArray = filterSubArray();
   //计算grid
   const gapPx = painter.getGapPx(canvasWidth, duration);
+
+
+  const Row = ({ index, key, style, data }) => {
+
+    const sub = data.data[index];
+    // console.log(sub);
+
+    return(
+      <div
+            className={`subBlock ${subBlockClass ? subBlockClass : ""}`}
+            // key为开始+结束+内容
+            key={sub.start + "" + sub.end + sub.content}
+            // 自定义的属性
+            submovable="false"
+            pagex=""
+            subwidth={`${sub.length * gapPx * 10}`}
+            style={{
+              ...style,
+              left: (sub.start - begin) * gapPx * 10,
+              width: sub.length * gapPx * 10,
+            }}
+          >
+            <div
+              className="subBlockDrag"
+              style={{
+                left: `-${1.5 * gapPx}px`,
+                width: 1.5 * gapPx,
+                borderRadius: `${0.7 * gapPx}px 0 0 ${0.7 * gapPx}px`,
+              }}
+              onMouseDown={(e) => {
+                handleMouseDown(e, sub, "dragLeft");
+              }}
+            >
+              <i className="fa fa-bars fa-rotate-90 subBlockDragIcon"></i>
+            </div>
+            <div
+              className="subBlockContent"
+              onMouseDown={(e) => {
+                handleMouseDown(e, sub, "content");
+              }}
+              onClick={(e) => {
+                onSubClick && onSubClick(sub);
+              }}
+            >
+              {sub.content.split(/\r?\n/).map((line, index) => (
+                <p key={index}>{line}</p>
+              ))}
+            </div>
+            <div
+              className="subBlockDrag"
+              style={{
+                right: `-${1.5 * gapPx}px`,
+                width: 1.5 * gapPx,
+                borderRadius: `0 ${0.7 * gapPx}px ${0.7 * gapPx}px 0`,
+              }}
+              onMouseDown={(e) => {
+                handleMouseDown(e, sub, "dragRight");
+              }}
+            >
+              <i className="fa fa-bars fa-rotate-90 subBlockDragIcon"></i>
+            </div>
+          </div>
+    );
+  }
+
   return (
     <div
       id="subBlocksContainer"
@@ -231,7 +297,17 @@ const SubBlocks = ({
           align-items: center;
         `}
       >
-        {filteredSubArray.map((sub) => (
+       <List
+          width={1500}
+          height="50%"
+          itemCount={filteredSubArray.length}
+          itemSize={40} //120
+          layout="horizontal"
+          itemData={{ data: filteredSubArray }}
+        >
+          {Row}
+        </List>
+        {/* {filteredSubArray.map((sub) => (
           <div
             className={`subBlock ${subBlockClass ? subBlockClass : ""}`}
             // key为开始+结束+内容
@@ -285,7 +361,7 @@ const SubBlocks = ({
               <i className="fa fa-bars fa-rotate-90 subBlockDragIcon"></i>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
