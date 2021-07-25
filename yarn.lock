@@ -5275,6 +5275,18 @@ shebang-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
   integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
 
+"shwave@git+https://github.com/Offem-Peter/shWave.git":
+  version "1.9.2"
+  resolved "git+https://github.com/Offem-Peter/shWave.git#7863a3d656799ffab8ccf850f042d1bc1883c419"
+  dependencies:
+    "@emotion/core" "^10.0.28"
+    duration-time-conversion "^1.0.1"
+    font-awesome "^4.7.0"
+    framer-motion "^1.10.3"
+    loadsh "^0.0.4"
+    react-dom "npm:@hot-loader/react-dom"
+    react-window "^1.8.6"
+
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"

@@ -64,6 +64,7 @@
     "framer-motion": "^1.10.3",
     "loadsh": "^0.0.4",
     "react-dom": "npm:@hot-loader/react-dom",
-    "react-window": "^1.8.6"
+    "react-window": "^1.8.6",
+    "shwave": "git+https://github.com/Offem-Peter/shWave.git"
   }
 }

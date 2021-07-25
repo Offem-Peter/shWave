@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { css, jsx } from "@emotion/core";
 import painter from "../common/painter";
 import common from "../common/common";
-import { FixedSizeList as List } from "react-window";
+import { VariableSizeList as List } from "react-window";
 
 //当前选择的subBlock
 let currentSubBlock = null;
@@ -208,8 +208,14 @@ const SubBlocks = ({
   //计算grid
   const gapPx = painter.getGapPx(canvasWidth, duration);
 
+   
+  const getItemSize = (index) =>{
 
-  const Row = ({ index, key, style, data }) => {
+    const sub = filteredSubArray[index];
+    return sub.length * gapPx * 10;
+  }
+
+  const Column = useCallback(({ index, style, data }) => {
 
     const sub = data.data[index];
     // console.log(sub);
@@ -270,7 +276,7 @@ const SubBlocks = ({
             </div>
           </div>
     );
-  }
+  });
 
   return (
     <div
@@ -301,11 +307,11 @@ const SubBlocks = ({
           width={1500}
           height="50%"
           itemCount={filteredSubArray.length}
-          itemSize={40} //120
+          itemSize={getItemSize} //120
           layout="horizontal"
           itemData={{ data: filteredSubArray }}
         >
-          {Row}
+          {Column}
         </List>
         {/* {filteredSubArray.map((sub) => (
           <div

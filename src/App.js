@@ -13,8 +13,8 @@ const App = () => {
   const [subArray, setSubArray] = useState([
     {
       content: "content 1",
-      end: 0.999,
-      length: 0.999,
+      end: 3.999,
+      length: 3.999,
       start: 0,
     },
     {
